@@ -1,0 +1,5 @@
+{
+    // 다른 코드가 있는 경우, 그 코드 뒤에 입력하면 된다.
+    "editor.formatOnSave": true
+
+}
