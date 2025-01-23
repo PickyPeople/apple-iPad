@@ -72,3 +72,20 @@ function hideSearch() {
 
   searchInputEl.value = "";
 }
+
+
+//요소가 가시성 관찰(화면에 그 요소가 보이는지 안보이는지)
+const io = new IntersectionObserver(function (entries) {
+  entries.forEach(function (entry) {
+    if (!entry.isIntersecting) {
+      entry.target.classList.remove('show');
+      return
+    }
+    entry.target.classList.add('show');
+  })
+})
+
+const infoEls = document.querySelectorAll('.info');
+infoEls.forEach(function (el) {
+  io.observe(el);
+})
