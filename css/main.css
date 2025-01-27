@@ -276,6 +276,7 @@ header {
   background-color: var(--color-header);
   z-index: 9;
   position: relative;
+  transition: 0.4s;
 }
 
 header .inner {
@@ -593,9 +594,30 @@ header.searching .search .autocompletes li {
     display: none;
   }
 
-  header .textfield {
+  header .search .textfield {
     border-radius: 10px;
     background-color: #1d1d1d;
+    width: auto;
+    transition: 0.2s;
+  }
+
+  header .search .search-closer {
+    display: none;
+  }
+
+  header .search .search-canceler {
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    color: var(--color-link);
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transition: 0.4s;
+    visibility: hidden;
+    opacity: 0;
   }
 
   header .search input,
@@ -611,6 +633,8 @@ header.searching .search .autocompletes li {
     background-color: transparent;
     visibility: hidden;
     opacity: 0;
+    transition: 0.3s;
+    transform: translate(0, -100px);
   }
 
   header .search .autocompletes ul li {
@@ -700,6 +724,31 @@ header.searching .search .autocompletes li {
     visibility: visible;
     opacity: 1;
     transform: translate(0, 0);
+  }
+
+  header.menuing.searching--moblie {
+    transform: translate(0, -30px);
+  }
+
+  header.menuing.searching--moblie .search .textfield {
+    width: calc(100% - 55px);
+  }
+
+  header.menuing.searching--moblie .search .autocompletes {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+
+  header.menuing.searching--moblie .search .search-canceler {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  header.menuing.searching--moblie .clone-menu {
+    visibility: hidden;
+    opacity: 0;
+    transform: translate(0, 100px);
   }
 }
 
