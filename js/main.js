@@ -1,5 +1,5 @@
 import ipads from "../data/ipads.js";
-import navigations from "../data/navigations.js"
+import navigations from "../data/navigations.js";
 
 //장바구니
 const basketStarterEl = document.querySelector("header .basket-starter");
@@ -89,64 +89,63 @@ function stopScroll() {
 }
 
 //허데 메뉴 토글!
-const menuStarterEl = document.querySelector('header .menu-starter');
-menuStarterEl.addEventListener('click', function () {
-  if (headerEl.classList.contains('menuing')) {
-    headerEl.classList.remove('menuing');
-    searchInputEl.value = '';
+const menuStarterEl = document.querySelector("header .menu-starter");
+menuStarterEl.addEventListener("click", function () {
+  if (headerEl.classList.contains("menuing")) {
+    headerEl.classList.remove("menuing");
+    searchInputEl.value = "";
     playScroll();
   } else {
-    headerEl.classList.add('menuing');
+    headerEl.classList.add("menuing");
     stopScroll();
   }
-})
+});
 
 //헤더 검색!
-const searchTextFieldEl = document.querySelector('header .textfield');
-const searchCancelEl = document.querySelector('header .search-canceler');
-searchTextFieldEl.addEventListener('click', function () {
-  headerEl.classList.add('searching--moblie');
+const searchTextFieldEl = document.querySelector("header .textfield");
+const searchCancelEl = document.querySelector("header .search-canceler");
+searchTextFieldEl.addEventListener("click", function () {
+  headerEl.classList.add("searching--moblie");
   searchInputEl.focus();
-})
+});
 
-searchCancelEl.addEventListener('click', function () {
-  headerEl.classList.remove('searching--moblie');
-})
-
+searchCancelEl.addEventListener("click", function () {
+  headerEl.classList.remove("searching--moblie");
+});
 
 //
-window.addEventListener('resize', function () {
+window.addEventListener("resize", function () {
   if (this.window.innerWidth <= 740) {
-    headerEl.classList.remove('searching');
+    headerEl.classList.remove("searching");
   } else {
-    headerEl.classList.add('searching--moblie');
+    headerEl.classList.add("searching--moblie");
   }
-})
+});
 
 //
-const navEl = document.querySelector('nav');
-const navMenuToggleEl = navEl.querySelector('.menu-toggler');
-const navMenuShadowEl = navEl.querySelector('.shadow');
+const navEl = document.querySelector("nav");
+const navMenuToggleEl = navEl.querySelector(".menu-toggler");
+const navMenuShadowEl = navEl.querySelector(".shadow");
 
-navMenuToggleEl.addEventListener('click', function () {
-  if (navEl.classList.contains('menuing')) {
+navMenuToggleEl.addEventListener("click", function () {
+  if (navEl.classList.contains("menuing")) {
     hideNavMenu();
   } else {
     showNavMenu();
   }
-})
-navEl.addEventListener('click', function (e) {
+});
+navEl.addEventListener("click", function (e) {
   e.stopPropagation();
-})
-navMenuShadowEl.addEventListener('click', hideNavMenu)
-window.addEventListener('click', hideNavMenu)
+});
+navMenuShadowEl.addEventListener("click", hideNavMenu);
+window.addEventListener("click", hideNavMenu);
 
 function showNavMenu() {
-  navEl.classList.add('menuing');
+  navEl.classList.add("menuing");
 }
 
 function hideNavMenu() {
-  navEl.classList.remove('menuing');
+  navEl.classList.remove("menuing");
 }
 
 //요소가 가시성 관찰(화면에 그 요소가 보이는지 안보이는지)
@@ -210,32 +209,40 @@ ipads.forEach(function (ipad) {
   itemsEl.append(itemEl);
 });
 
-
-const navigationsEl = document.querySelector('footer .navigations')
+const navigationsEl = document.querySelector("footer .navigations");
 navigations.forEach(function (nav) {
-  const mapEl = document.createElement('div');
-  mapEl.classList.add('map');
+  const mapEl = document.createElement("div");
+  mapEl.classList.add("map");
 
-  let mapList = '';
+  let mapList = "";
   nav.maps.forEach(function (map) {
     mapList += /* html */ `
       <li>
         <a href="${map.url}">${map.name}</a>
       </li>
-    `
-  })
+    `;
+  });
 
-  mapEl.innerHTML = /*html*/`
+  mapEl.innerHTML = /*html*/ `
     <h3>
       <span class="text">${nav.title}</span>
+      <span class="icon">+</span>
     </h3>
     <ul>
       ${mapList}
     </ul>
-  `
+  `;
 
   navigationsEl.append(mapEl);
-})
+});
 
-const thisYearEl = document.querySelector('span.this-year');
+const thisYearEl = document.querySelector("span.this-year");
 thisYearEl.textContent = new Date().getFullYear();
+
+const mapEls = document.querySelectorAll("footer .navigations .map");
+mapEls.forEach(function (el) {
+  const h3El = el.querySelector("h3");
+  h3El.addEventListener("click", function () {
+    el.classList.toggle("active");
+  });
+});
